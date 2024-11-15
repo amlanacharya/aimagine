@@ -1,0 +1,8 @@
+.env
+*.pyc
+*.log
+*.txt
+Plan.md
+*.json
+*.csv
+__pycache__/
