@@ -1,13 +1,20 @@
 from typing import List, Dict, Optional
 import os
 from groq import Groq
+from dotenv import load_dotenv
 
 class LLMService:
     def __init__(self):
         """Initialize LLM service with Groq"""
-        self.client = Groq(
-            api_key=os.getenv('GROQ_API_KEY'),
-        )
+        # Load environment variables
+        load_dotenv()
+        
+        # Get API key
+        api_key = os.getenv('GROQ_API_KEY')
+        if not api_key:
+            raise ValueError("GROQ_API_KEY not found in environment variables. Please add it to your .env file")
+            
+        self.client = Groq(api_key=api_key)
         self.model = os.getenv('GROQ_MODEL_NAME', 'llama-3.2-90b-text-preview')
         self.max_tokens = int(os.getenv('MAX_TOKENS', '500'))
         self.temperature = float(os.getenv('TEMPERATURE', '0.7'))

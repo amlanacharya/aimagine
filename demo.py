@@ -1,4 +1,14 @@
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Load environment variables at the start of the script
+load_dotenv()
+
+print("Environment variables loaded:")
+print(f"GROQ_API_KEY exists: {'GROQ_API_KEY' in os.environ}")
+print(f"GROQ_MODEL_NAME: {os.getenv('GROQ_MODEL_NAME')}")
+
 from src.services.data_ingestion import DataIngestionService
 from src.services.embedding_service import EmbeddingService
 from src.services.faiss_service import FAISSService
